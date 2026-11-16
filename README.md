@@ -381,7 +381,19 @@ prod-nexus-data
 فایل `examples/docker-storage-maintenance.cron` یک نمونه Crontab ارائه می‌کند:
 
 - Audit هر دو روز یک‌بار (بر اساس روزهای تقویمی Cron)
-- Cleanup عادی هر دو روز یک‌بار
+- Cleanupعادی هر دو روز یک‌بار
+
+# Storage audit - every other calendar day
+0 2 */2 * * /usr/local/sbin/docker-storage-audit.sh
+
+# Regular cleanup - every other calendar day
+30 2 */2 * * /usr/local/sbin/docker-storage-cleanup.sh --apply
+
+# Detached volume cleanup - every Sunday
+0 3 * * 0 /usr/local/sbin/docker-storage-cleanup.sh --apply --weekly-volumes
+
+
+
 - بررسی هفتگی Volumeها در حالت Dry-run
 
 برای نصب، مسیرها را در فایل نمونه با مسیر نصب واقعی خود تطبیق دهید و سپس آن را به Crontab کاربر root اضافه کنید:
