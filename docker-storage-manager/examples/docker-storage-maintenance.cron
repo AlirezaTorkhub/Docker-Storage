@@ -1,0 +1,14 @@
+# Example root crontab for Docker Storage Manager.
+# Update paths if you install the scripts somewhere else.
+# These schedules use calendar-day cron semantics; */2 is not an exact 48-hour interval.
+
+# Read-only audit every other calendar day at 02:00.
+0 2 */2 * * /usr/local/sbin/docker-storage-audit.sh
+
+# Regular cleanup every other calendar day at 02:30.
+# Volumes are NOT considered by this command.
+30 2 */2 * * /usr/local/sbin/docker-storage-cleanup.sh --apply
+
+# Weekly detached-volume review in DRY-RUN mode only.
+# Review /var/log/docker-storage-cleanup.log before any manual volume deletion.
+0 3 * * 0 /usr/local/sbin/docker-storage-cleanup.sh --weekly-volumes

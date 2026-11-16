@@ -1,0 +1,5 @@
+# Add Docker volume names here, one per line.
+# These volumes are always excluded from the weekly cleanup sweep.
+# Example:
+# prod-postgres-data
+# prod-nexus-data
